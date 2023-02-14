@@ -70,11 +70,46 @@
     margin-bottom: 24px;
 }
 
-.add-task {
-    padding: 8px 12px;
+.task {
+    padding: 12px;
     border-radius: 5px;
+    display: flex;
+    gap: 8px;
 }
 
-.add-task:hover {
+.task:hover {
     background-color: #ddd;
+}
+
+.checkbox {
+    transform: scale(1.8);
+    margin-right: 11px;
+    accent-color: #393f4d;
+}
+
+.checkbox-label {
+    margin-bottom: 12px;
+}
+
+.checkbox-label span {
+    font-size: 18px;
+}
+
+input[type="text"] {
+    background-color: #FFFFFF;
+    border: 1px solid #D6D9DC;
+    border-radius: 3px;
+    flex: 1;
+    padding: 7px;
+    font-size: 14px;
+}
+
+input:focus {
+	outline: none;
+}
+
+.close-icon {
+    font-weight: bold;
+    align-self: center;
+    padding: 0 4px;
 }
