@@ -1,3 +1,5 @@
+import Task from "./task";
+
 const addTask = document.createElement("div");
 addTask.innerHTML = "<b>+</b> &nbsp; Add Task";
 addTask.classList.add("task");
@@ -9,15 +11,15 @@ function buildInboxSection(taskContainer) {
 
   addTask.addEventListener("click", (event) => {
     taskContainer.removeChild(addTask);
-    let { newTask, input } = createTask(taskContainer);
+    createTask(taskContainer);
   });
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-      const input = document.getElementById("task");
+      const input = document.getElementById("input");
       if (input !== null && input.value.length !== 0) {
         const newTask = input.parentElement;
-        const text = newTask.querySelector(".task-text");
+        const text = newTask.querySelector(".task-content");
         text.textContent = input.value;
         text.style.display = "block";
         text.style.flex = "1";
@@ -41,13 +43,13 @@ function createTask(taskContainer) {
 
   const input = document.createElement("input");
   input.type = "text";
-  input.id = "task";
+  input.id = "input";
   input.name = "task";
   input.maxLength = "50";
   input.autofocus = true;
 
   const text = document.createElement("div");
-  text.classList.add("task-text");
+  text.classList.add("task-content");
   text.style.display = "none";
 
   const closeIcon = document.createElement("div");
@@ -69,8 +71,6 @@ function createTask(taskContainer) {
       taskContainer.appendChild(addTask);
     }
   });
-
-  return { newTask, input };
 }
 
 export { buildInboxSection };
