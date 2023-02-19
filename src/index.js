@@ -1,19 +1,12 @@
 import { buildInboxSection } from "./inbox";
+import Task from "./task";
+import Project from "./project";
+import Storage from "./storage";
 import "./style.css";
 
 const contentDiv = document.getElementById("content");
 
-const mainDiv = document.createElement("div");
-mainDiv.classList.add("main");
-
-const navBar = document.createElement("div");
-navBar.classList.add("nav-bar");
-
-const taskContainer = document.createElement("div");
-taskContainer.classList.add("task-container");
-
-// currentTab = Inbox, Today, This week, Project
-let allTabs = {};
+// currentTab = Inbox, Today, Project
 let currentTab;
 
 function buildPage() {
@@ -28,25 +21,35 @@ function buildPage() {
 
   // ------------ Main ----------
 
+  const mainDiv = document.createElement("div");
+  mainDiv.classList.add("main");
+
   // --- Nav Bar ---
 
+  const navBar = document.createElement("div");
+  navBar.classList.add("nav-bar");
+
+  // Inbox
   const inboxTab = document.createElement("div");
   inboxTab.classList.add("tab");
   inboxTab.textContent = "Inbox";
+  Storage.addProject("Inbox");
 
+  // Today
   const todayTab = document.createElement("div");
   todayTab.classList.add("tab");
   todayTab.textContent = "Today";
+  Storage.addProject("Today");
 
   navBar.appendChild(inboxTab);
   navBar.appendChild(todayTab);
 
-  allTabs["Inbox"] = inboxTab;
-  allTabs["Today"] = todayTab;
-
   // TODO: Add projects
 
   // -- Task Container ---
+
+  const taskContainer = document.createElement("div");
+  taskContainer.classList.add("task-container");
 
   buildInboxSection(taskContainer);
   currentTab = inboxTab;

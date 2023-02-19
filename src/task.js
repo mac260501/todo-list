@@ -1,16 +1,16 @@
 export default class Task {
-  constructor(content, completed) {
-    this.content = content;
+  constructor(name, completed) {
+    this.name = name;
     this.completed = completed;
   }
 
-  getContent() {
-    return this.content;
+  getName() {
+    return this.name;
   }
 
   setCompleted(completed) {
     this.completed = completed;
   }
 
-  // TODO: editContent, Due Dates
+  // TODO: editName, Due Dates
 }

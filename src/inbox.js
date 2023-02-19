@@ -1,5 +1,8 @@
 import Task from "./task";
+import Project from "./project";
+import Storage from "./storage";
 
+// "Add Task" Element
 const addTask = document.createElement("div");
 addTask.innerHTML = "<b>+</b> &nbsp; Add Task";
 addTask.classList.add("task");
@@ -10,20 +13,17 @@ function buildInboxSection(taskContainer) {
   heading2.textContent = "Inbox";
 
   addTask.addEventListener("click", (event) => {
+    // Initialize the task element
     taskContainer.removeChild(addTask);
-    createTask(taskContainer);
+    initializeTask(taskContainer);
   });
 
   document.addEventListener("keydown", (e) => {
+    // Create task when user presses "Enter"
     if (e.key === "Enter") {
       const input = document.getElementById("input");
       if (input !== null && input.value.length !== 0) {
-        const newTask = input.parentElement;
-        const text = newTask.querySelector(".task-content");
-        text.textContent = input.value;
-        text.style.display = "block";
-        text.style.flex = "1";
-        newTask.removeChild(input);
+        createTask(input.parentElement, input);
         taskContainer.appendChild(addTask);
       }
     }
@@ -33,14 +33,16 @@ function buildInboxSection(taskContainer) {
   taskContainer.appendChild(addTask);
 }
 
-function createTask(taskContainer) {
+function initializeTask(taskContainer) {
   const newTask = document.createElement("div");
 
+  // checkbox
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
   checkbox.classList.add("checkbox");
   checkbox.value = "done";
 
+  // input field
   const input = document.createElement("input");
   input.type = "text";
   input.id = "input";
@@ -48,10 +50,12 @@ function createTask(taskContainer) {
   input.maxLength = "50";
   input.autofocus = true;
 
+  // task content
   const text = document.createElement("div");
   text.classList.add("task-content");
   text.style.display = "none";
 
+  // close icon
   const closeIcon = document.createElement("div");
   closeIcon.textContent = "x";
   closeIcon.classList.add("close-icon");
@@ -71,6 +75,29 @@ function createTask(taskContainer) {
       taskContainer.appendChild(addTask);
     }
   });
+}
+
+function createTask(taskElement, input) {
+  const text = taskElement.querySelector(".task-content");
+  text.textContent = input.value;
+  text.style.display = "block";
+  text.style.flex = "1";
+  taskElement.removeChild(input);
+
+  const checkbox = taskElement.querySelector(".checkbox");
+  checkbox.addEventListener("change", () => {
+    const taskElement = checkbox.parentElement;
+    let taskIndex = Array.from(taskElement.parentNode.children).indexOf(
+      taskElement
+    );
+    taskIndex--;
+    Storage.updateTaskCompleted("Inbox", taskIndex, checkbox.checked);
+  });
+
+  Storage.addTask(
+    "Inbox",
+    new Task(text.textContent, taskElement.querySelector(".checkbox").checked)
+  );
 }
 
 export { buildInboxSection };
