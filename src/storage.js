@@ -42,5 +42,9 @@ export default class Storage {
     Storage.updateProject(projectName, project);
   }
 
-  static deleteTask(projectName, index) {}
+  static deleteTask(projectName, index) {
+    const project = Storage.getProject(projectName);
+    project.removeTask(index);
+    Storage.updateProject(projectName, project);
+  }
 }

@@ -1,6 +1,4 @@
 import { buildInboxSection } from "./inbox";
-import Task from "./task";
-import Project from "./project";
 import Storage from "./storage";
 import "./style.css";
 

@@ -12,5 +12,9 @@ export default class Task {
     this.completed = completed;
   }
 
+  isCompleted() {
+    return this.completed;
+  }
+
   // TODO: editName, Due Dates
 }
