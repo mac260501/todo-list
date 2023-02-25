@@ -28,7 +28,17 @@ export default class Storage {
     }
   }
 
-  static deleteProject(projectName) {}
+  static deleteProject(projectName) {
+    localStorage.removeItem(projectName);
+  }
+
+  static doesProjectExist(projectName) {
+    if (localStorage.getItem(projectName) === null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   static addTask(projectName, task) {
     const project = Storage.getProject(projectName);

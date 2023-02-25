@@ -56,6 +56,11 @@
     gap: 8px;
 }
 
+.curr-tab {
+    background-color: #ccc;
+    font-weight: bold;
+}
+
 .project-header {
     margin-top: 36px;
     margin-bottom: 8px;
@@ -109,6 +114,13 @@ input[type="text"] {
     flex: 1;
     padding: 7px;
     font-size: 14px;
+    min-width: 0;
+}
+
+input[type="text"]:invalid {
+    border: 1px solid #D55C5F;
+    color: #D55C5F;
+    box-shadow: none;
 }
 
 input:focus {
