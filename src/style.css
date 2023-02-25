@@ -52,6 +52,13 @@
     margin-bottom: 8px;
     padding: 8px 12px;
     border-radius: 5px;
+    display: flex;
+    gap: 8px;
+}
+
+.project-header {
+    margin-top: 36px;
+    margin-bottom: 8px;
 }
 
 .tab:hover {
